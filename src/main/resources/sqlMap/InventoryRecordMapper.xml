@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parksys.maintain.dao.InventoryRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.parksys.maintain.entity.InventoryRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="inventory_number" property="inventoryNumber" jdbcType="VARCHAR" />
+    <result column="inventory_start_time" property="inventoryStartTime" jdbcType="VARCHAR" />
+    <result column="inventory_end_time" property="inventoryEndTime" jdbcType="VARCHAR" />
+    <result column="regis_start_time" property="regisStartTime" jdbcType="VARCHAR" />
+    <result column="regis_end_time" property="regisEndTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, inventory_number, inventory_start_time, inventory_end_time, regis_start_time, 
+    regis_end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectMaxId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_record
+    where id=(select MAX(id) from  inventory_record);
+  </select>
+  
+  <!-- 条件查询单条记录 -->
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.InventoryRecord" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_record
+    <where>
+      <if test="id!=null and id!=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="inventoryNumber!=null and inventoryNumber!=''">
+        and  inventory_number = #{inventoryNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryStartTime!=null and inventoryStartTime!=''">
+         and inventory_start_time = #{inventoryStartTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryEndTime!=null and inventoryEndTime!=''">
+         and inventory_end_time = #{inventoryEndTime,jdbcType=VARCHAR}
+      </if>
+      <if test="regisStartTime!=null and regisStartTime!=''">
+         and regis_start_time = #{regisStartTime,jdbcType=VARCHAR}
+      </if>
+      <if test="regisEndTime!=null and regisEndTime!=''">
+         and regis_end_time = #{regisEndTime,jdbcType=VARCHAR}
+      </if>
+     </where>
+  </select>
+  
+  <!-- 批量查询结果-->
+  <select id="selectInventoryRecordList" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.InventoryRecord" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_record
+    <where>
+      <if test="id!=null and id!=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="inventoryNumber!=null and inventoryNumber!=''">
+        inventory_number = #{inventoryNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryStartTime!=null and inventoryStartTime!=''">
+        inventory_start_time = #{inventoryStartTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryEndTime!=null and inventoryEndTime!=''">
+        inventory_end_time = #{inventoryEndTime,jdbcType=VARCHAR}
+      </if>
+      <if test="regisStartTime!=null and regisStartTime!=''">
+        regis_start_time = #{regisStartTime,jdbcType=VARCHAR}
+      </if>
+      <if test="regisEndTime!=null and regisEndTime!=''">
+        regis_end_time = #{regisEndTime,jdbcType=VARCHAR}
+      </if>
+     </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inventory_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.parksys.maintain.entity.InventoryRecord" >
+    insert into inventory_record (id, inventory_number, inventory_start_time, 
+      inventory_end_time, regis_start_time, regis_end_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{inventoryNumber,jdbcType=VARCHAR}, #{inventoryStartTime,jdbcType=VARCHAR}, 
+      #{inventoryEndTime,jdbcType=VARCHAR}, #{regisStartTime,jdbcType=VARCHAR}, #{regisEndTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.parksys.maintain.entity.InventoryRecord" >
+    insert into inventory_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="inventoryNumber != null" >
+        inventory_number,
+      </if>
+      <if test="inventoryStartTime != null" >
+        inventory_start_time,
+      </if>
+      <if test="inventoryEndTime != null" >
+        inventory_end_time,
+      </if>
+      <if test="regisStartTime != null" >
+        regis_start_time,
+      </if>
+      <if test="regisEndTime != null" >
+        regis_end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="inventoryNumber != null" >
+        #{inventoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryStartTime != null" >
+        #{inventoryStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryEndTime != null" >
+        #{inventoryEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="regisStartTime != null" >
+        #{regisStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="regisEndTime != null" >
+        #{regisEndTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parksys.maintain.entity.InventoryRecord" >
+    update inventory_record
+    <set >
+      <if test="inventoryNumber != null" >
+        inventory_number = #{inventoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryStartTime != null" >
+        inventory_start_time = #{inventoryStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryEndTime != null" >
+        inventory_end_time = #{inventoryEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="regisStartTime != null" >
+        regis_start_time = #{regisStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="regisEndTime != null" >
+        regis_end_time = #{regisEndTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parksys.maintain.entity.InventoryRecord" >
+    update inventory_record
+    set inventory_number = #{inventoryNumber,jdbcType=VARCHAR},
+      inventory_start_time = #{inventoryStartTime,jdbcType=VARCHAR},
+      inventory_end_time = #{inventoryEndTime,jdbcType=VARCHAR},
+      regis_start_time = #{regisStartTime,jdbcType=VARCHAR},
+      regis_end_time = #{regisEndTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parksys.maintain.dao.ParkMeterMapper" >
+  <resultMap id="BaseResultMap" type="com.parksys.maintain.entity.ParkMeter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="park_number" property="parkNumber" jdbcType="VARCHAR" />
+    <result column="park_postion" property="parkPostion" jdbcType="VARCHAR" />
+    <result column="park_fee" property="parkFee" jdbcType="VARCHAR" />
+    <result column="use_state" property="useState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, park_number, park_postion, park_fee, use_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from park_meter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 单条记录条件查询 -->
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.ParkMeter" >
+    select 
+    <include refid="Base_Column_List" />
+    from park_meter
+    <where>
+      <if test="id !=null and id !=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="parkNumber !=null and parkNumber !=''">
+         and park_number = #{parkNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="parkPostion !=null and parkPostion !=''">
+        and park_postion = #{parkPostion,jdbcType=VARCHAR}
+      </if>
+      <if test="parkFee !=null and parkFee !=''">
+        and park_fee = #{parkFee,jdbcType=VARCHAR}
+      </if>
+      <if test="useState !=null and useState !=''">
+        and use_state = #{useState,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  <!-- 批量条件查询 -->
+  <select id="selectParkMeterList" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.ParkMeter" >
+    select 
+    <include refid="Base_Column_List" />
+    from park_meter
+    <where>
+      <if test="id !=null and id !=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="parkNumber !=null and parkNumber !=''">
+         and park_number = #{parkNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="parkPostion !=null and parkPostion !=''">
+        and park_postion = #{parkPostion,jdbcType=VARCHAR}
+      </if>
+      <if test="parkFee !=null and parkFee !=''">
+        and park_fee = #{parkFee,jdbcType=VARCHAR}
+      </if>
+      <if test="useState !=null and useState !=''">
+        and use_state = #{useState,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by  id
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from park_meter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.parksys.maintain.entity.ParkMeter" >
+    insert into park_meter (id, park_number, park_postion, 
+      park_fee, use_state)
+    values (#{id,jdbcType=INTEGER}, #{parkNumber,jdbcType=VARCHAR}, #{parkPostion,jdbcType=VARCHAR}, 
+      #{parkFee,jdbcType=VARCHAR}, #{useState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parksys.maintain.entity.ParkMeter" >
+    insert into park_meter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parkNumber != null" >
+        park_number,
+      </if>
+      <if test="parkPostion != null" >
+        park_postion,
+      </if>
+      <if test="parkFee != null" >
+        park_fee,
+      </if>
+      <if test="useState != null" >
+        use_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parkNumber != null" >
+        #{parkNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parkPostion != null" >
+        #{parkPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="parkFee != null" >
+        #{parkFee,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null" >
+        #{useState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parksys.maintain.entity.ParkMeter" >
+    update park_meter
+    <set >
+      <if test="parkNumber != null" >
+        park_number = #{parkNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parkPostion != null" >
+        park_postion = #{parkPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="parkFee != null" >
+        park_fee = #{parkFee,jdbcType=VARCHAR},
+      </if>
+      <if test="useState != null" >
+        use_state = #{useState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parksys.maintain.entity.ParkMeter" >
+    update park_meter
+    set park_number = #{parkNumber,jdbcType=VARCHAR},
+      park_postion = #{parkPostion,jdbcType=VARCHAR},
+      park_fee = #{parkFee,jdbcType=VARCHAR},
+      use_state = #{useState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

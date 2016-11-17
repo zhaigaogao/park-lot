@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parksys.maintain.dao.VehicleInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.parksys.maintain.entity.VehicleInformation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="owner_phone" property="ownerPhone" jdbcType="VARCHAR" />
+    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_name, owner_phone, car_number
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from vehicle_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 条件查询单条记录 -->
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.VehicleInformation">
+    select 
+    <include refid="Base_Column_List" />
+    from vehicle_information
+    <where>
+       <if test="id!=null and id!='' ">
+          id = #{id,jdbcType=INTEGER}
+       </if>
+       <if test="ownerName!=null and ownerName!='' ">
+          and owner_name = #{ownerName,jdbcType=VARCHAR}
+       </if>
+       <if test="ownerPhone!=null and ownerPhone!='' ">
+          and owner_phone = #{ownerPhone,jdbcType=VARCHAR}
+       </if>
+       <if test="carNumber!=null and carNumber!='' ">
+          and car_number = #{carNumber,jdbcType=VARCHAR}
+       </if>
+    </where>
+  </select>
+  
+  <!-- 条件查询多条记录 -->
+  <select id="selectVehicleInformationList" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.VehicleInformation">
+    select 
+    <include refid="Base_Column_List" />
+    from vehicle_information
+    <where>
+       <if test="id!=null and id!='' ">
+          id = #{id,jdbcType=INTEGER}
+       </if>
+       <if test="ownerName!=null and ownerName!='' ">
+          and owner_name = #{ownerName,jdbcType=VARCHAR}
+       </if>
+       <if test="ownerPhone!=null and ownerPhone!='' ">
+          and owner_phone = #{ownerPhone,jdbcType=VARCHAR}
+       </if>
+       <if test="carNumber!=null and carNumber!='' ">
+          and car_number = #{carNumber,jdbcType=VARCHAR}
+       </if>
+    </where>
+    order by id
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from vehicle_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.parksys.maintain.entity.VehicleInformation" >
+    insert into vehicle_information (id, owner_name, owner_phone, 
+      car_number)
+    values (#{id,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, #{ownerPhone,jdbcType=VARCHAR}, 
+      #{carNumber,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.parksys.maintain.entity.VehicleInformation" >
+    insert into vehicle_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerName != null" >
+        owner_name,
+      </if>
+      <if test="ownerPhone != null" >
+        owner_phone,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ownerName != null" >
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPhone != null" >
+        #{ownerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.parksys.maintain.entity.VehicleInformation" >
+    update vehicle_information
+    <set >
+      <if test="ownerName != null" >
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPhone != null" >
+        owner_phone = #{ownerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.parksys.maintain.entity.VehicleInformation" >
+    update vehicle_information
+    set owner_name = #{ownerName,jdbcType=VARCHAR},
+      owner_phone = #{ownerPhone,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

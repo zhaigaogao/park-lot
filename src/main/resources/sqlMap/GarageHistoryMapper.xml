@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parksys.maintain.dao.GarageHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.parksys.maintain.entity.GarageHistory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="storage_time" property="storageTime" jdbcType="VARCHAR" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="VARCHAR" />
+    <result column="park_number" property="parkNumber" jdbcType="VARCHAR" />
+    <result column="park_status" property="parkStatus" jdbcType="VARCHAR" />
+    <result column="data_sources" property="dataSources" jdbcType="VARCHAR" />
+    <result column="regis_time" property="regisTime" jdbcType="VARCHAR" />
+    <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,plate_number, storage_time, delivery_time, park_number, park_status, data_sources, regis_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from garage_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectGarageHistoryList" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    select 
+    <include refid="Base_Column_List" />
+    from garage_history 
+    <where>
+    <if test="id !=null and id !=''">
+    id = #{id,jdbcType=INTEGER}
+    </if>
+     <if test="plateNumber !=null and plateNumber !=''">
+      and plate_number = #{plateNumber,jdbcType=INTEGER}
+    </if>
+    <if test="storageTime !=null and storageTime !=''">
+     and storage_time = #{storageTime,jdbcType=VARCHAR}
+    </if>
+    <if test="deliveryTime !=null and deliveryTime !=''">
+     and delivery_time = #{deliveryTime,jdbcType=VARCHAR}
+    </if>
+    <if test="parkNumber !=null and parkNumber !=''">
+     and park_number = #{parkNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="parkStatus !=null and parkStatus !=''">
+     and park_status = #{parkStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="dataSources !=null and dataSources !=''">
+     and  data_sources = #{dataSources,jdbcType=VARCHAR}
+    </if>
+    <if test="regisTime !=null and regisTime !=''">
+     and regis_time = #{regisTime,jdbcType=VARCHAR}
+    </if>
+    </where> 
+    order by storage_time
+  </select>
+  
+  <!-- 查询历史表中最近的一条车库停车历史记录 -->
+  <select id="selectNearlyGarageHistory" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    select 
+    <include refid="Base_Column_List" />
+    from garage_history 
+    <where>
+      id in (
+      SELECT
+			MAX(id)
+		FROM
+			garage_history
+		<where>
+		  <if test="plateNumber !=null and plateNumber !=''">
+             and plate_number = #{plateNumber,jdbcType=INTEGER}
+          </if>
+          <if test="storageTime !=null and storageTime !=''">
+             and storage_time = #{storageTime,jdbcType=VARCHAR}
+          </if>
+          <if test="deliveryTime !=null and deliveryTime !=''">
+             and delivery_time = #{deliveryTime,jdbcType=VARCHAR}
+          </if>
+          <if test="parkNumber !=null and parkNumber !=''">
+             and park_number = #{parkNumber,jdbcType=VARCHAR}
+          </if>
+          <if test="parkStatus !=null and parkStatus !=''">
+             and park_status = #{parkStatus,jdbcType=VARCHAR}
+          </if>
+          <if test="dataSources !=null and dataSources !=''">
+             and  data_sources = #{dataSources,jdbcType=VARCHAR}
+          </if>
+          <if test="regisTime !=null and regisTime !=''">
+             and regis_time = #{regisTime,jdbcType=VARCHAR}
+          </if>
+		</where>
+      )
+    </where>
+  </select>
+  
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    select 
+    <include refid="Base_Column_List" />
+    from garage_history 
+    <where>
+    <if test="id !=null and id !=''">
+    id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="plateNumber !=null and plateNumber !=''">
+     and plate_number = #{plateNumber,jdbcType=INTEGER}
+    </if>
+    <if test="storageTime !=null and storageTime !=''">
+     and storage_time = #{storageTime,jdbcType=VARCHAR}
+    </if>
+    <if test="deliveryTime !=null and deliveryTime !=''">
+     and delivery_time = #{deliveryTime,jdbcType=VARCHAR}
+    </if>
+    <if test="parkNumber !=null and parkNumber !=''">
+     and park_number = #{parkNumber,jdbcType=VARCHAR}
+    </if>
+    <if test="parkStatus !=null and parkStatus !=''">
+     and park_status = #{parkStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="dataSources !=null and dataSources !=''">
+     and  data_sources = #{dataSources,jdbcType=VARCHAR}
+    </if>
+    <if test="regisTime !=null and regisTime !=''">
+     and regis_time = #{regisTime,jdbcType=VARCHAR}
+    </if>
+    </where> 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from garage_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    insert into garage_history (id,plate_number,storage_time, delivery_time, 
+      park_number, park_status, data_sources, 
+      regis_time)
+      values (#{id,jdbcType=INTEGER},#{plateNumber,jdbcType=VARCHAR}, #{storageTime,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=VARCHAR}, 
+      #{parkNumber,jdbcType=VARCHAR}, #{parkStatus,jdbcType=VARCHAR}, #{dataSources,jdbcType=VARCHAR}, 
+      #{regisTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    insert into garage_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="plateNumber != null" >
+        plate_number,
+      </if>
+      <if test="storageTime != null" >
+        storage_time,
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time,
+      </if>
+      <if test="parkNumber != null" >
+        park_number,
+      </if>
+      <if test="parkStatus != null" >
+        park_status,
+      </if>
+      <if test="dataSources != null" >
+        data_sources,
+      </if>
+      <if test="regisTime != null" >
+        regis_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plateNumber != null" >
+        #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="storageTime != null" >
+        #{storageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="parkNumber != null" >
+        #{parkNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parkStatus != null" >
+        #{parkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSources != null" >
+        #{dataSources,jdbcType=VARCHAR},
+      </if>
+      <if test="regisTime != null" >
+        #{regisTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 根据车库历史表id更新车库信息 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    update garage_history
+    <set >
+      <if test="plateNumber != null" >
+        plate_number = #{plateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="storageTime != null" >
+        storage_time = #{storageTime,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="parkNumber != null" >
+        park_number = #{parkNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parkStatus != null" >
+        park_status = #{parkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSources != null" >
+        data_sources = #{dataSources,jdbcType=VARCHAR},
+      </if>
+      <if test="regisTime != null" >
+        regis_time = #{regisTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.parksys.maintain.entity.GarageHistory" >
+    update garage_history
+    set plate_number = #{plateNumber,jdbcType=VARCHAR},
+      storage_time =#{storageTime,jdbcType=VARCHAR},
+      delivery_time = #{deliveryTime,jdbcType=VARCHAR},
+      park_number = #{parkNumber,jdbcType=VARCHAR},
+      park_status = #{parkStatus,jdbcType=VARCHAR},
+      data_sources = #{dataSources,jdbcType=VARCHAR},
+      regis_time = #{regisTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

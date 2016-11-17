@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.parksys.maintain.dao.InventoryTtableMapper" >
+  <resultMap id="BaseResultMap" type="com.parksys.maintain.entity.InventoryTtable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+    <result column="inventory_time" property="inventoryTime" jdbcType="VARCHAR" />
+    <result column="inventory_personnel" property="inventoryPersonnel" jdbcType="VARCHAR" />
+    <result column="regis_time" property="regisTime" jdbcType="VARCHAR" />
+    <result column="inventory_status" property="inventoryStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_number, inventory_time, inventory_personnel, regis_time, inventory_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 单条记录条件查询 -->
+  <select id="selectSingle" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_table
+    <where>
+      <if test="id!=null  and id!=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="carNumber!=null  and carNumber!=''">
+        and car_number = #{carNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryTime!=null  and inventoryTime!=''">
+        and inventory_time = #{inventoryTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryPersonnel!=null  and inventoryPersonnel!=''">
+        and inventory_personnel = #{inventoryPersonnel,jdbcType=VARCHAR}
+      </if>
+      <if test="regisTime!=null  and regisTime!=''">
+        and regis_time = #{regisTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryStatus!=null  and inventoryStatus!=''">
+        and inventory_status = #{inventoryStatus,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  <!-- 盘点表中按照盘点开始时间查询出摸个时间段的盘点记录 -->
+  <select id="selectListByInventoryTime" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_table
+    <where>
+      <if test="id!=null  and id!=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="carNumber!=null  and carNumber!=''">
+        and car_number = #{carNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryTime!=null  and inventoryTime!=''">
+        and inventory_time > #{inventoryTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryPersonnel!=null  and inventoryPersonnel!=''">
+        and inventory_personnel = #{inventoryPersonnel,jdbcType=VARCHAR}
+      </if>
+      <if test="regisTime!=null  and regisTime!=''">
+        and regis_time = #{regisTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryStatus!=null  and inventoryStatus!=''">
+        and inventory_status = #{inventoryStatus,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  
+  <!-- 条件查询多条记录 -->
+  <select id="selectInventoryTtableList" resultMap="BaseResultMap" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory_table
+    <where>
+      <if test="id!=null  and id!=''">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="carNumber!=null  and carNumber!=''">
+        and car_number = #{carNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryTime!=null  and inventoryTime!=''">
+        and inventory_time = #{inventoryTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryPersonnel!=null  and inventoryPersonnel!=''">
+        and inventory_personnel = #{inventoryPersonnel,jdbcType=VARCHAR}
+      </if>
+      <if test="regisTime!=null  and regisTime!=''">
+        and regis_time = #{regisTime,jdbcType=VARCHAR}
+      </if>
+      <if test="inventoryStatus!=null  and inventoryStatus!=''">
+        and inventory_status = #{inventoryStatus,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by  id
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inventory_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    insert into inventory_table (id, car_number, inventory_time, 
+      inventory_personnel, regis_time, inventory_status
+      )
+    values (#{id,jdbcType=INTEGER}, #{carNumber,jdbcType=VARCHAR}, #{inventoryTime,jdbcType=VARCHAR}, 
+      #{inventoryPersonnel,jdbcType=VARCHAR}, #{regisTime,jdbcType=VARCHAR}, #{inventoryStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    insert into inventory_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+      <if test="inventoryTime != null" >
+        inventory_time,
+      </if>
+      <if test="inventoryPersonnel != null" >
+        inventory_personnel,
+      </if>
+      <if test="regisTime != null" >
+        regis_time,
+      </if>
+      <if test="inventoryStatus != null" >
+        inventory_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryTime != null" >
+        #{inventoryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryPersonnel != null" >
+        #{inventoryPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="regisTime != null" >
+        #{regisTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryStatus != null" >
+        #{inventoryStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    update inventory_table
+    <set >
+      <if test="carNumber != null" >
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryTime != null" >
+        inventory_time = #{inventoryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryPersonnel != null" >
+        inventory_personnel = #{inventoryPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="regisTime != null" >
+        regis_time = #{regisTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryStatus != null" >
+        inventory_status = #{inventoryStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.parksys.maintain.entity.InventoryTtable" >
+    update inventory_table
+    set car_number = #{carNumber,jdbcType=VARCHAR},
+      inventory_time = #{inventoryTime,jdbcType=VARCHAR},
+      inventory_personnel = #{inventoryPersonnel,jdbcType=VARCHAR},
+      regis_time = #{regisTime,jdbcType=VARCHAR},
+      inventory_status = #{inventoryStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
