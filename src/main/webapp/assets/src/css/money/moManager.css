@@ -1,0 +1,84 @@
+/* CSS Document */
+/* car-header start */
+.car-header{
+	width:100%;
+	color:white;
+	line-height:60px;
+	text-indent: 2em;
+	background-color:rgb(55,162,234);
+}
+/* car-header end */
+.area-row{
+	margin-top: 30px;
+}
+.area-allCar{
+	margin-right: 20px;
+}
+.col-md-4{
+	margin-left:30px;
+}
+.area-setNum{
+	width:100px;
+	display: inline-block;
+}
+.area-carSize{
+	width:100px;
+	margin-left: 140px;
+}
+.area-titleCo{
+	text-align: center;
+}
+.mo-day{
+	width:100%;
+	margin-bottom: 40px;
+}
+.mo-day span{
+	padding:5px;
+	border-radius:5px;
+	cursor:pointer;
+}
+.mo-day span:hover{
+	background-color:#eee;
+}
+.span_active{
+	background-color:#eee;
+}
+.mo-set{
+	margin-top:20px;
+}
+.area-carNum{
+    float: right;
+	width: 30%;
+	text-align: center;
+}
+.mo-setNum{
+	display:inline-block;
+	width:80px;
+}
+.mo-span{padding:0 5px;}
+@media (min-width: 992px) {
+	.col-md-4 {
+	    width: 30%;
+	}
+}
+/* mo-carType start */
+.mo-carType{
+	height:50px;
+	width:100%;
+}
+.carP{
+	margin-top:20px;
+	margin-left:20px;
+}
+.little_P span{
+	margin-left:40px;
+}
+
+/*.mo-pre{margin:40px 0;}*/
+.thumbnail{
+	box-shadow: 0 0 10px #CCC;
+    -o-box-shadow: 0 0 10px #CCC;
+    -ms-box-shadow: 0 0 10px #CCC;
+    -moz-box-shadow: 0 0 10px #CCC;
+    -webkit-box-shadow: 0 0 10px #CCC;
+}

@@ -1,0 +1,47 @@
+/* CSS Document */
+/* car-header start */
+.car-header{
+	width:100%;
+	color:white;
+	line-height:60px;
+	text-indent: 2em;
+	background-color:rgb(55,162,234);
+}
+/* car-header end */
+.area-row{
+	margin-top: 100px;
+}
+.area-allCar{
+	margin-right: 20px;
+}
+.col-md-4{
+	margin-left:30px;
+}
+.area-setNum{
+	width:100px;
+	display: inline-block;
+}
+.area-carSize{
+	width:100px;
+	margin-left: 170px;
+}
+.area-titleCo{
+	text-align: center;
+}
+.area-carNum{
+    float: right;
+	width: 30%;
+	text-align: center;
+}
+@media (min-width: 992px) {
+	.col-md-4 {
+	    width: 30%;
+	}
+}
+.thumbnail{
+	box-shadow: 0 0 10px #CCC;
+    -o-box-shadow: 0 0 10px #CCC;
+    -ms-box-shadow: 0 0 10px #CCC;
+    -moz-box-shadow: 0 0 10px #CCC;
+    -webkit-box-shadow: 0 0 10px #CCC;
+}

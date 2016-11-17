@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cmcc.oa.dao.TempCarInfoMapper">
+  <resultMap id="BaseResultMap" type="cmcc.oa.entity.TempCarInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="client_id" jdbcType="INTEGER" property="clientId" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="car_type" jdbcType="INTEGER" property="carType" />
+    <result column="car_user_name" jdbcType="VARCHAR" property="carUserName" />
+    <result column="car_user_dept" jdbcType="VARCHAR" property="carUserDept" />
+    <result column="car_user_phone" jdbcType="VARCHAR" property="carUserPhone" />
+    <result column="visit_user_name" jdbcType="VARCHAR" property="visitUserName" />
+    <result column="visit_user_comp" jdbcType="VARCHAR" property="visitUserComp" />
+    <result column="visit_user_phone" jdbcType="VARCHAR" property="visitUserPhone" />
+    <result column="reg_user_name" jdbcType="VARCHAR" property="regUserName" />
+    <result column="reg_user_dept" jdbcType="VARCHAR" property="regUserDept" />
+    <result column="reg_user_phone" jdbcType="VARCHAR" property="regUserPhone" />
+    <result column="reg_in_time" jdbcType="TIMESTAMP" property="regInTime" />
+    <result column="reg_out_time" jdbcType="TIMESTAMP" property="regOutTime" />
+    <result column="ret_msg" jdbcType="VARCHAR" property="retMsg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, client_id, car_number, car_type, car_user_name, car_user_dept, car_user_phone, 
+    visit_user_name, visit_user_comp, visit_user_phone, reg_user_name, reg_user_dept, 
+    reg_user_phone, reg_in_time, reg_out_time, ret_msg
+  </sql>
+  <sql id="Base_Insert_SQL">
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="carType != null">
+        car_type,
+      </if>
+      <if test="carUserName != null">
+        car_user_name,
+      </if>
+      <if test="carUserDept != null">
+        car_user_dept,
+      </if>
+      <if test="carUserPhone != null">
+        car_user_phone,
+      </if>
+      <if test="visitUserName != null">
+        visit_user_name,
+      </if>
+      <if test="visitUserComp != null">
+        visit_user_comp,
+      </if>
+      <if test="visitUserPhone != null">
+        visit_user_phone,
+      </if>
+      <if test="regUserName != null">
+        reg_user_name,
+      </if>
+      <if test="regUserDept != null">
+        reg_user_dept,
+      </if>
+      <if test="regUserPhone != null">
+        reg_user_phone,
+      </if>
+      <if test="regInTime != null">
+        reg_in_time,
+      </if>
+      <if test="regOutTime != null">
+        reg_out_time,
+      </if>
+      <if test="retMsg != null">
+        ret_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null">
+        #{carType,jdbcType=INTEGER},
+      </if>
+      <if test="carUserName != null">
+        #{carUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="carUserDept != null">
+        #{carUserDept,jdbcType=VARCHAR},
+      </if>
+      <if test="carUserPhone != null">
+        #{carUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUserName != null">
+        #{visitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUserComp != null">
+        #{visitUserComp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUserPhone != null">
+        #{visitUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserName != null">
+        #{regUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserDept != null">
+        #{regUserDept,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserPhone != null">
+        #{regUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="regInTime != null">
+        #{regInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regOutTime != null">
+        #{regOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retMsg != null">
+        #{retMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from temp_car_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByParamters" parameterType="cmcc.oa.entity.TempCarInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from temp_car_info
+    <where>
+	   	 <if test="clientId != null">
+	        client_id = #{clientId,jdbcType=INTEGER}
+         </if>
+    </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from temp_car_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cmcc.oa.entity.TempCarInfo">
+    insert into temp_car_info (id, client_id, car_number, 
+      car_type, car_user_name, car_user_dept, 
+      car_user_phone, visit_user_name, visit_user_comp, 
+      visit_user_phone, reg_user_name, reg_user_dept, 
+      reg_user_phone, reg_in_time, reg_out_time, 
+      ret_msg)
+    values (#{id,jdbcType=INTEGER}, #{clientId,jdbcType=INTEGER}, #{carNumber,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=INTEGER}, #{carUserName,jdbcType=VARCHAR}, #{carUserDept,jdbcType=VARCHAR}, 
+      #{carUserPhone,jdbcType=VARCHAR}, #{visitUserName,jdbcType=VARCHAR}, #{visitUserComp,jdbcType=VARCHAR}, 
+      #{visitUserPhone,jdbcType=VARCHAR}, #{regUserName,jdbcType=VARCHAR}, #{regUserDept,jdbcType=VARCHAR}, 
+      #{regUserPhone,jdbcType=VARCHAR}, #{regInTime,jdbcType=TIMESTAMP}, #{regOutTime,jdbcType=TIMESTAMP}, 
+      #{retMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cmcc.oa.entity.TempCarInfo">
+    insert into temp_car_info
+	<include refid="Base_Insert_SQL" />
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cmcc.oa.entity.TempCarInfo">
+    update temp_car_info
+    <set>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null">
+        car_type = #{carType,jdbcType=INTEGER},
+      </if>
+      <if test="carUserName != null">
+        car_user_name = #{carUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="carUserDept != null">
+        car_user_dept = #{carUserDept,jdbcType=VARCHAR},
+      </if>
+      <if test="carUserPhone != null">
+        car_user_phone = #{carUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUserName != null">
+        visit_user_name = #{visitUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUserComp != null">
+        visit_user_comp = #{visitUserComp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUserPhone != null">
+        visit_user_phone = #{visitUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserName != null">
+        reg_user_name = #{regUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserDept != null">
+        reg_user_dept = #{regUserDept,jdbcType=VARCHAR},
+      </if>
+      <if test="regUserPhone != null">
+        reg_user_phone = #{regUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="regInTime != null">
+        reg_in_time = #{regInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regOutTime != null">
+        reg_out_time = #{regOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retMsg != null">
+        ret_msg = #{retMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cmcc.oa.entity.TempCarInfo">
+    update temp_car_info
+    set client_id = #{clientId,jdbcType=INTEGER},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=INTEGER},
+      car_user_name = #{carUserName,jdbcType=VARCHAR},
+      car_user_dept = #{carUserDept,jdbcType=VARCHAR},
+      car_user_phone = #{carUserPhone,jdbcType=VARCHAR},
+      visit_user_name = #{visitUserName,jdbcType=VARCHAR},
+      visit_user_comp = #{visitUserComp,jdbcType=VARCHAR},
+      visit_user_phone = #{visitUserPhone,jdbcType=VARCHAR},
+      reg_user_name = #{regUserName,jdbcType=VARCHAR},
+      reg_user_dept = #{regUserDept,jdbcType=VARCHAR},
+      reg_user_phone = #{regUserPhone,jdbcType=VARCHAR},
+      reg_in_time = #{regInTime,jdbcType=TIMESTAMP},
+      reg_out_time = #{regOutTime,jdbcType=TIMESTAMP},
+      ret_msg = #{retMsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

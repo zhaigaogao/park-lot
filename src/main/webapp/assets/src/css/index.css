@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.parking-info {
+  margin: 20px 20px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px #dedede, -1px -1px 5px #dedede;
+  padding: 20px 0;
+}
+.parking-info .info-item {
+  height: 95px;
+  text-align: center;
+  padding: 0 20px;
+  border-right: 1px solid #dedede;
+}
+.parking-info .info-item:last-of-type {
+  border-right: 0;
+}
+.parking-info .info-item > strong {
+  font-style: normal;
+  font-size: 26px;
+  font-weight: bold;
+  color: #b6b6b6;
+  display: block;
+  height: 60px;
+  line-height: 60px;
+}
+.parking-info .info-item > span {
+  color: #afafaf;
+  font-size: 14px;
+}
+.parking-charts {
+  margin: 20px 20px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px #dedede, -1px -1px 5px #dedede;
+  padding: 0 10px;
+}
+.parking-charts .chart-item {
+  height: 280px;
+  padding: 20px 10px;
+}
+.parking-charts .chart-item .chart {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #dedede;
+}

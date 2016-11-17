@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<portable-config>
+	<config-file path="WEB-INF/classes/app.properties">
+		<replace key="QR_CODE_UPLOAD_PATH">/opt/upload/qrcode</replace>
+		<replace key="FILE_UPLOAD_PATH">/opt/upload/file</replace>
+		<replace key="PERSON_INFO_FILE_PATH">/opt/upload/person</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/mysql.properties">
+		<replace key="url"><![CDATA[jdbc:mysql://192.168.2.100:3306/ydsp_sub?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true]]></replace>
+		<replace key="username">root</replace>
+		<replace key="userpass">root</replace>
+	</config-file>
+</portable-config>

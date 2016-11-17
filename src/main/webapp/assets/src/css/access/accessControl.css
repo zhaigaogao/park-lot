@@ -1,0 +1,30 @@
+/* CSS Document */
+/* car-header start */
+.car-header{
+	width:100%;
+	color:white;
+	line-height:60px;
+	text-indent: 2em;
+	background-color:rgb(55,162,234);
+}
+/* car-header end */
+/* ac-center start */
+.ac-center{
+	width:80%;
+	margin:50px auto 0;
+	/*margin-left:200px;*/
+}
+.ac_ip{
+	width:100px;
+	height:20px;
+}
+.ac_bj{padding:0 5px;}
+.area-carSize{
+	width:100px;
+	margin-left: 170px;
+}
+.area-setNum{
+	width:100px;
+	display: inline-block;
+}
+.ac_delete{margin-left: 215px;margin-top:30px;}

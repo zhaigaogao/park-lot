@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.menu-panel {
+    background: #384e65;
+    width: 220px;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    top: 60px;
+}
+.menu {
+    padding: 0;
+    li {
+        list-style: none;
+        outline: none;
+    }
+    a {
+        display: block;
+        color: #cfd9e6;
+        text-decoration: none;
+        padding: 10px 0 10px 40px;
+        cursor: pointer;
+        &:hover {
+            background: #2d3c4d;
+        }
+        &.current {
+            background:#2d3c4d;
+            border-left: 3px solid #37a2ea;
+            padding-left: 37px;
+        }
+    }
+    .glyphicon {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+}

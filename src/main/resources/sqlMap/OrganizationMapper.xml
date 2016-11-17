@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cmcc.oa.dao.OrganizationMapper">
+	<resultMap id="BaseResultMap" type="cmcc.oa.entity.Organization">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="creat_time" property="creatTime" jdbcType="VARCHAR" />
+		<result column="org_name" property="orgName" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+		<result column="showindex" property="showindex" jdbcType="INTEGER" />
+		<result column="previous_id" property="previousId" jdbcType="VARCHAR" />
+		<result column="org_fullname" property="orgFullname" jdbcType="VARCHAR" />
+		<result column="haschildorg" property="haschildorg" jdbcType="VARCHAR" />
+		<result column="company_id" property="companyId" jdbcType="VARCHAR" />
+		<result column="v_id" property="vId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, creat_time, org_name, status, update_time, showindex,
+		previous_id,
+		org_fullname,
+		haschildorg, company_id, v_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from organization
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		organization
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="cmcc.oa.entity.Organization">
+		insert into organization (id,
+		creat_time, org_name,
+		status, update_time, showindex,
+		previous_id,
+		org_fullname, haschildorg,
+		company_id, v_id)
+		values
+		(#{id,jdbcType=VARCHAR}, #{creatTime,jdbcType=VARCHAR},
+		#{orgName,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=VARCHAR}, #{showindex,jdbcType=INTEGER},
+		#{previousId,jdbcType=VARCHAR}, #{orgFullname,jdbcType=VARCHAR},
+		#{haschildorg,jdbcType=VARCHAR},
+		#{companyId,jdbcType=VARCHAR},
+		#{vId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cmcc.oa.entity.Organization">
+		insert into organization
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="creatTime != null">
+				creat_time,
+			</if>
+			<if test="orgName != null">
+				org_name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="showindex != null">
+				showindex,
+			</if>
+			<if test="previousId != null">
+				previous_id,
+			</if>
+			<if test="orgFullname != null">
+				org_fullname,
+			</if>
+			<if test="haschildorg != null">
+				haschildorg,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="vId != null">
+				v_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="creatTime != null">
+				#{creatTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="showindex != null">
+				#{showindex,jdbcType=INTEGER},
+			</if>
+			<if test="previousId != null">
+				#{previousId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgFullname != null">
+				#{orgFullname,jdbcType=VARCHAR},
+			</if>
+			<if test="haschildorg != null">
+				#{haschildorg,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=VARCHAR},
+			</if>
+			<if test="vId != null">
+				#{vId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cmcc.oa.entity.Organization">
+		update organization
+		<set>
+			<if test="creatTime != null">
+				creat_time = #{creatTime,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				org_name = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="showindex != null">
+				showindex = #{showindex,jdbcType=INTEGER},
+			</if>
+			<if test="previousId != null">
+				previous_id = #{previousId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgFullname != null">
+				org_fullname = #{orgFullname,jdbcType=VARCHAR},
+			</if>
+			<if test="haschildorg != null">
+				haschildorg = #{haschildorg,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null">
+				company_id = #{companyId,jdbcType=VARCHAR},
+			</if>
+			<if test="vId != null">
+				v_id = #{vId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cmcc.oa.entity.Organization">
+		update
+		organization
+		set creat_time = #{creatTime,jdbcType=VARCHAR},
+		org_name =
+		#{orgName,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=VARCHAR},
+		showindex =
+		#{showindex,jdbcType=INTEGER},
+		previous_id =
+		#{previousId,jdbcType=VARCHAR},
+		org_fullname =
+		#{orgFullname,jdbcType=VARCHAR},
+		haschildorg =
+		#{haschildorg,jdbcType=VARCHAR},
+		company_id =
+		#{companyId,jdbcType=VARCHAR},
+		v_id = #{vId,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 通过名字查询 -->
+	<select id="findByName" parameterType="cmcc.oa.entity.Organization"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from organization where org_name=#{orgName} and status=1
+		<choose>
+			<when test="previousId != null and previousId !=''">
+				and previous_id=#{previousId}
+			</when>
+			<otherwise>
+				and (previous_id is null or previous_id='')
+			</otherwise>
+		</choose>
+	</select>
+	<!-- 查询父部门下的所有子部门 -->
+	<select id="findByPreId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from organization where status=1
+		<choose>
+			<when test="orgId != null and orgId !=''">
+				and previous_id=#{orgId}
+			</when>
+			<otherwise>
+				and (previous_id is null or previous_id='')
+			</otherwise>
+		</choose>
+	</select>
+	<!-- 查询所有部门 -->
+	<select id="findAll" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from organization where status=1
+	</select>
+</mapper>

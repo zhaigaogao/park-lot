@@ -1,0 +1,240 @@
+/* CSS Document */
+header{
+	width:100%;
+	height:60px;
+	background-color:#eee;
+}
+/* article start */
+article{
+	overflow: hidden;
+	position: fixed;
+	bottom:40px;
+	float:left;
+	left:220px;
+	top:60px;
+	right:0;
+}
+/* car-header start */
+.car-header{
+	width:100%;
+	color:white;
+	line-height:60px;
+	text-indent: 2em;
+	background-color:rgb(55,162,234);
+}
+/* car-header end */
+/* section start */
+section{
+	width:100%;
+
+}
+.car-search{
+	width:50%;
+	height:50px;
+	margin:0 auto;
+}
+.car-search input{
+	margin-top: 10px;
+	height:30px;
+	float:left;
+	width:70%;
+}
+.searchClick{
+	width:28%;
+	float:left;
+	color:white;
+	height:30px;
+	cursor: pointer;
+	margin-top: 10px;
+	line-height: 30px;
+	text-align: center;
+	background-color: rgb(55,162,234);
+}
+.searchClick:hover{
+	opacity:.8;
+}
+/* cared  start*/
+.cared{
+	width:90%;
+	margin:0 auto;
+}
+/* attention start */
+.attention{
+	width:100%;
+	height:50px;
+}
+.attention p{
+	margin-right: 10px;
+	line-height: 30px;
+	float:left;
+}
+.carColor{
+	width:50px;
+	height:30px;
+	cursor:pointer;
+	line-height: 50px;
+	border-radius:5px;
+	text-align: center;
+	background-color: #999;
+}
+.otherCar{
+	background-color:#eee;
+}
+.selftCar{
+	background-color:skyblue;
+}
+.selftCar:hover{
+	opacity: .9;
+}
+.carColor:hover{
+	background-color:#333;
+	color:white;
+	opacity: .9;
+}
+.allCar{
+	background-color:#AAA;
+}
+/* attention end */
+.carsRecord{
+	width:100%;
+	height:320px;
+}
+/* carNew start */
+.carNew,.carAdd{
+	float:left;
+	width:90px;
+	height:50px;
+	padding:5px;
+	cursor:pointer;
+	margin-left: 10px;
+	border-radius:5px;
+	text-align: center;
+	margin-bottom: 20px;
+	box-shadow: 0 0 10px #CCC;
+    -o-box-shadow: 0 0 10px #CCC;
+    -ms-box-shadow: 0 0 10px #CCC;
+    -moz-box-shadow: 0 0 10px #CCC;
+    -webkit-box-shadow: 0 0 10px #CCC;
+}
+.addCars{
+	float:left;
+	color:white;
+	padding:5px;
+	cursor:pointer;
+	background:#AAA;
+	border-radius:5px;
+	display:online-block;
+}
+.carNew p{margin:0;}
+.deleteCar:hover,.carAdd:hover{
+	opacity: .8;
+}
+/*.carNew img{
+	height:100%;
+}*/
+.deleteCar{
+	width:27%;
+	/*height:50%;*/
+	border-radius:50%;
+	position: relative;
+	top:-57px;
+	left:40px;
+}
+/* carNew end */
+.carAdd{
+	color:white;
+	font-size:60px;
+	line-height: 42px;
+	border:1px solid #CCC;
+	background-color:#CCC;
+}
+/* cared  end*/
+/* section end */
+/* article end */
+.paginationCom{
+	float:left;
+	margin-left:400px;
+}
+.carSelf{
+	width:300px;
+}
+.navCar{margin-bottom:20px;}
+/* personCar start */
+.personCar{
+	width:100%;
+	height:28px;
+}
+/* addCar start */
+.addCar{
+	position: absolute;
+	background: white;
+	height:500px;
+	width:400px;
+	margin:auto;
+	bottom:0;
+	left: 0;
+	right:0;
+	top:0;
+}
+/* addCar end */
+/* personCarer start */
+.personCarer{display:none;}
+/* personCarer end */
+footer{
+	float:left;
+	width:100%;
+	height:40px;
+	position: fixed;
+	bottom:0;
+	background-color:pink;
+}
+/* ztreeMo start */
+.ztreeMo{
+	width:50px;
+	display: none;
+	cursor:pointer;
+	font-size:12px;
+	margin-left:95px;
+	border-radius:5px;
+	text-align:center;
+	line-height: 20px;
+	background-color:#eee;
+}
+.ztreeMo:hover{
+	opacity: .8;
+}
+.carPerson{
+	height: 40px;
+    width: 100px;
+    background-color: #eee;
+    border-radius: 5px;
+    position: relative;
+    top: -90px;
+    left: -10px;
+    display: none;
+	// box-shadow: 0 0 10px #CCC;
+ //    -o-box-shadow: 0 0 10px #CCC;
+ //    -ms-box-shadow: 0 0 10px #CCC;
+ //    -moz-box-shadow: 0 0 10px #CCC;
+ //    -webkit-box-shadow: 0 0 10px #CCC;
+}
+
+.carNew:hover .carPerson{
+	display:block;
+}
+/*.:hover .deleteCar{
+	display:none;
+}*/
+// .paginationFirst{
+// 	display:inline-block;
+// 	height:30px;
+// 	width:50px;
+// 	text-align: center;
+// 	line-height: 50px;
+// 	border-radius:5px;
+// 	background-color: #eee;
+// }
+.car_active{
+	color:#eee;
+	background-color:#333;
+}

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cmcc.oa.dao.ParkingHistoryMapper">
+  <resultMap id="BaseResultMap" type="cmcc.oa.entity.ParkingHistory">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="car_owner_type" jdbcType="INTEGER" property="carOwnerType" />
+    <result column="appointment_detail_id" jdbcType="BIGINT" property="appointmentDetailId" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="space_id" jdbcType="VARCHAR" property="spaceId" />
+    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
+    <result column="enter_device" jdbcType="VARCHAR" property="enterDevice" />
+    <result column="enter_status" jdbcType="INTEGER" property="enterStatus" />
+    <result column="exit_time" jdbcType="TIMESTAMP" property="exitTime" />
+    <result column="exit_device" jdbcType="VARCHAR" property="exitDevice" />
+    <result column="exit_status" jdbcType="INTEGER" property="exitStatus" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, car_number, car_owner_type, appointment_detail_id, area_id, space_id, enter_time, 
+    enter_device, enter_status, exit_time, exit_device, exit_status, price, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parking_history
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from parking_history
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cmcc.oa.entity.ParkingHistory">
+    insert into parking_history (id, car_number, car_owner_type, 
+      appointment_detail_id, area_id, space_id, 
+      enter_time, enter_device, enter_status, 
+      exit_time, exit_device, exit_status, 
+      price, status)
+    values (#{id,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, #{carOwnerType,jdbcType=INTEGER}, 
+      #{appointmentDetailId,jdbcType=BIGINT}, #{areaId,jdbcType=INTEGER}, #{spaceId,jdbcType=VARCHAR}, 
+      #{enterTime,jdbcType=TIMESTAMP}, #{enterDevice,jdbcType=VARCHAR}, #{enterStatus,jdbcType=INTEGER}, 
+      #{exitTime,jdbcType=TIMESTAMP}, #{exitDevice,jdbcType=VARCHAR}, #{exitStatus,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cmcc.oa.entity.ParkingHistory">
+    insert into parking_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="carOwnerType != null">
+        car_owner_type,
+      </if>
+      <if test="appointmentDetailId != null">
+        appointment_detail_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="spaceId != null">
+        space_id,
+      </if>
+      <if test="enterTime != null">
+        enter_time,
+      </if>
+      <if test="enterDevice != null">
+        enter_device,
+      </if>
+      <if test="enterStatus != null">
+        enter_status,
+      </if>
+      <if test="exitTime != null">
+        exit_time,
+      </if>
+      <if test="exitDevice != null">
+        exit_device,
+      </if>
+      <if test="exitStatus != null">
+        exit_status,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwnerType != null">
+        #{carOwnerType,jdbcType=INTEGER},
+      </if>
+      <if test="appointmentDetailId != null">
+        #{appointmentDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="spaceId != null">
+        #{spaceId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterTime != null">
+        #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterDevice != null">
+        #{enterDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="enterStatus != null">
+        #{enterStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exitTime != null">
+        #{exitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exitDevice != null">
+        #{exitDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="exitStatus != null">
+        #{exitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cmcc.oa.entity.ParkingHistory">
+    update parking_history
+    <set>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwnerType != null">
+        car_owner_type = #{carOwnerType,jdbcType=INTEGER},
+      </if>
+      <if test="appointmentDetailId != null">
+        appointment_detail_id = #{appointmentDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="spaceId != null">
+        space_id = #{spaceId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterTime != null">
+        enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterDevice != null">
+        enter_device = #{enterDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="enterStatus != null">
+        enter_status = #{enterStatus,jdbcType=INTEGER},
+      </if>
+      <if test="exitTime != null">
+        exit_time = #{exitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exitDevice != null">
+        exit_device = #{exitDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="exitStatus != null">
+        exit_status = #{exitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cmcc.oa.entity.ParkingHistory">
+    update parking_history
+    set car_number = #{carNumber,jdbcType=VARCHAR},
+      car_owner_type = #{carOwnerType,jdbcType=INTEGER},
+      appointment_detail_id = #{appointmentDetailId,jdbcType=BIGINT},
+      area_id = #{areaId,jdbcType=INTEGER},
+      space_id = #{spaceId,jdbcType=VARCHAR},
+      enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      enter_device = #{enterDevice,jdbcType=VARCHAR},
+      enter_status = #{enterStatus,jdbcType=INTEGER},
+      exit_time = #{exitTime,jdbcType=TIMESTAMP},
+      exit_device = #{exitDevice,jdbcType=VARCHAR},
+      exit_status = #{exitStatus,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

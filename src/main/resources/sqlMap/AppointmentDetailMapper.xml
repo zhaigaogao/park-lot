@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cmcc.oa.dao.AppointmentDetailMapper">
+  <resultMap id="BaseResultMap" type="cmcc.oa.entity.AppointmentDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="oa_process_info_id" jdbcType="BIGINT" property="oaProcessInfoId" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="car_model" jdbcType="INTEGER" property="carModel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="is_send_mess" jdbcType="INTEGER" property="isSendMess" />
+    <result column="is_used" jdbcType="INTEGER" property="isUsed" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="field1" jdbcType="VARCHAR" property="field1" />
+    <result column="field2" jdbcType="VARCHAR" property="field2" />
+    <result column="field3" jdbcType="VARCHAR" property="field3" />
+  </resultMap>
+  <resultMap id="AppointmentDetailVo" type="cmcc.oa.vo.AppointmentDetailVo" extends="BaseResultMap">
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="create_user_mobile" jdbcType="VARCHAR" property="createUserMobile" />
+    <result column="create_user_org_id" jdbcType="VARCHAR" property="createUserOrgId" />
+    <result column="create_user_all_org_name" jdbcType="VARCHAR" property="createUserAllOrgName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, oa_process_info_id, unit, user_name, mobile, car_number, car_model, create_time, 
+    area_id, start_time, end_time, status, is_send_mess, is_used, remark, field1, field2, 
+    field3
+  </sql>
+  <sql id="Base_Query_Paramters">
+      <if test="id != null">
+        id=#{id,jdbcType=BIGINT}
+      </if>
+      <if test="oaProcessInfoId != null">
+        and oa_process_info_id=#{oaProcessInfoId,jdbcType=BIGINT}
+      </if>
+      <if test="unit != null">
+        and unit=#{unit,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        and user_name=#{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null">
+        and mobile= #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="carNumber != null">
+        and car_number=#{carNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="carModel != null">
+        and car_model=#{carModel,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+        and create_time=#{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="startTime != null">
+        and start_time=#{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and end_time=#{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="status != null">
+        and status=#{status,jdbcType=INTEGER}
+      </if>
+      <if test="isSendMess != null">
+        and is_send_mess=#{isSendMess,jdbcType=INTEGER}
+      </if>
+      <if test="isUsed != null">
+        and is_used=#{isUsed,jdbcType=INTEGER}
+      </if>
+      <if test="remark != null">
+        and remark=#{remark,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  <!-- 单条记录条件查询 -->
+  <select id="selectSingle" parameterType="cmcc.oa.entity.AppointmentDetail" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from third_oa_appointment_detail
+    <where>
+    	<include refid="Base_Query_Paramters" />
+    </where>
+  </select>
+  
+  <!-- 计数 -->
+  <select id="count" parameterType="cmcc.oa.entity.AppointmentDetail" resultType="java.lang.Long">
+    select count(1)
+    from third_oa_appointment_detail
+    <where>
+    	<include refid="Base_Query_Paramters" />
+    </where>
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from third_oa_appointment_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from third_oa_appointment_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cmcc.oa.entity.AppointmentDetail">
+    insert into third_oa_appointment_detail (id, oa_process_info_id, unit, 
+      user_name, mobile, car_number, 
+      car_model, create_time, area_id, 
+      start_time, end_time, status, 
+      is_send_mess, is_used, remark, 
+      field1, field2, field3
+      )
+    values (#{id,jdbcType=BIGINT}, #{oaProcessInfoId,jdbcType=BIGINT}, #{unit,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, 
+      #{carModel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{areaId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{isSendMess,jdbcType=INTEGER}, #{isUsed,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{field1,jdbcType=VARCHAR}, #{field2,jdbcType=VARCHAR}, #{field3,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+	insert into third_oa_appointment_detail (id, oa_process_info_id, unit, 
+      user_name, mobile, car_number, 
+      car_model, create_time, area_id, start_time, 
+      end_time, status, is_send_mess, 
+      is_used, remark, field1, 
+      field2, field3) values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.id,jdbcType=BIGINT}, #{item.oaProcessInfoId,jdbcType=BIGINT}, #{item.unit,jdbcType=VARCHAR}, 
+	      #{item.userName,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, #{item.carNumber,jdbcType=VARCHAR}, 
+	      #{item.carModel,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.areaId,jdbcType=INTEGER}, #{item.startTime,jdbcType=TIMESTAMP}, 
+	      #{item.endTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=INTEGER}, #{item.isSendMess,jdbcType=INTEGER}, 
+	      #{item.isUsed,jdbcType=INTEGER}, #{item.remark,jdbcType=VARCHAR}, #{item.field1,jdbcType=VARCHAR}, 
+	      #{item.field2,jdbcType=VARCHAR}, #{item.field3,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+  <insert id="insertSelective" parameterType="cmcc.oa.entity.AppointmentDetail">
+    insert into third_oa_appointment_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="oaProcessInfoId != null">
+        oa_process_info_id,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="carModel != null">
+        car_model,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isSendMess != null">
+        is_send_mess,
+      </if>
+      <if test="isUsed != null">
+        is_used,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="field1 != null">
+        field1,
+      </if>
+      <if test="field2 != null">
+        field2,
+      </if>
+      <if test="field3 != null">
+        field3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="oaProcessInfoId != null">
+        #{oaProcessInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carModel != null">
+        #{carModel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isSendMess != null">
+        #{isSendMess,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="field1 != null">
+        #{field1,jdbcType=VARCHAR},
+      </if>
+      <if test="field2 != null">
+        #{field2,jdbcType=VARCHAR},
+      </if>
+      <if test="field3 != null">
+        #{field3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cmcc.oa.entity.AppointmentDetail">
+    update third_oa_appointment_detail
+    <set>
+      <if test="oaProcessInfoId != null">
+        oa_process_info_id = #{oaProcessInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carModel != null">
+        car_model = #{carModel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isSendMess != null">
+        is_send_mess = #{isSendMess,jdbcType=INTEGER},
+      </if>
+      <if test="isUsed != null">
+        is_used = #{isUsed,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="field1 != null">
+        field1 = #{field1,jdbcType=VARCHAR},
+      </if>
+      <if test="field2 != null">
+        field2 = #{field2,jdbcType=VARCHAR},
+      </if>
+      <if test="field3 != null">
+        field3 = #{field3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cmcc.oa.entity.AppointmentDetail">
+    update third_oa_appointment_detail
+    set oa_process_info_id = #{oaProcessInfoId,jdbcType=BIGINT},
+      unit = #{unit,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      car_model = #{carModel,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      area_id = #{areaId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      is_send_mess = #{isSendMess,jdbcType=INTEGER},
+      is_used = #{isUsed,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      field1 = #{field1,jdbcType=VARCHAR},
+      field2 = #{field2,jdbcType=VARCHAR},
+      field3 = #{field3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="query" parameterType="cmcc.oa.vo.AppointmentDetailVo" resultMap="AppointmentDetailVo">
+		SELECT 
+		  a.id,
+		  a.unit,
+		  a.user_name,
+		  a.mobile,
+		  a.car_number,
+		  a.car_model,
+		  a.start_time,
+		  a.end_time,
+		  a.create_time,
+		  a.is_used,
+		  a.remark,
+		  a.field1,
+		  a.field2,
+		  a.field3,
+		  p.create_user_id,
+		  p.create_user_name,
+		  p.field1 AS create_user_mobile,
+		  p.create_user_all_org_name 
+		FROM
+		  third_oa_appointment_detail a 
+		  INNER JOIN third_oa_process_info p 
+		    ON p.id = a.oa_process_info_id 
+		  LEFT JOIN parking_info i 
+		    ON i.appointment_detail_id = a.id 
+	  <where>
+	  	a.status = 1 
+	  	<if test="isUsed != null">
+	  		AND is_used = #{isUsed,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="enterTime != null">
+	  		AND #{enterTime,jdbcType=TIMESTAMP} BETWEEN a.start_time AND a.end_time
+	  	</if>
+	  	<if test="carNumber != null and carNumber !='' ">
+	  		AND a.car_number = #{carNumber,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="carModel != null and carModel !=''">
+	  		AND a.car_model = #{carModel,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="createUserName != null and createUserName !=''">
+	  		AND p.create_user_name like concat('%',#{createUserName},'%')
+	  	</if>
+	  	<if test="userName != null and userName !=''">
+	  		AND a.user_name like concat('%',#{userName},'%')
+	  	</if>
+	  	ORDER BY a.start_time
+	  </where>
+  </select>
+</mapper>

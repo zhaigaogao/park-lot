@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cmcc.oa.dao.VehicleInfoMapper">
+	<resultMap id="BaseResultMap" type="cmcc.oa.entity.VehicleInfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+		<result column="car_model" property="carModel" jdbcType="INTEGER" />
+		<result column="car_mark" property="carMark" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="flag" property="flag" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap type="cmcc.oa.vo.VehicinfoVo" id="ResultMapVo"
+		extends="BaseResultMap">
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="flag" property="flag" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="company_id" property="companyId" jdbcType="VARCHAR" />
+		<result column="org_name" property="orgName" jdbcType="VARCHAR" />
+		<result column="org_fullname" property="orgFullName" jdbcType="VARCHAR" />
+		<result column="company_fullname" property="companyFullName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, car_number, car_model, car_mark, create_time,
+		update_time, flag
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from vehicle_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<!-- 单条记录条件查询 -->
+	<select id="selectSingle" resultMap="BaseResultMap"
+		parameterType="cmcc.oa.entity.VehicleInfo">
+		select
+		<include refid="Base_Column_List" />
+		from vehicle_info
+		<where>
+			<if test="id != null and id!=''">
+				id=#{id,jdbcType=BIGINT}
+			</if>
+			<if test="carNumber != null and carNumber!=''">
+				and car_number=#{carNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="carModel != null and carModel !=''">
+				and car_model=#{carModel,jdbcType=INTEGER}
+			</if>
+			<if test="carMark != null and carMark !=''">
+				and car_mark=#{carMark,jdbcType=INTEGER}
+			</if>
+			<if test="createTime != null and createTime!=''">
+				and create_time=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime != null and updateTime!=''">
+				and update_time=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="flag != null and flag!=''">
+				and flag=#{flag,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+
+	<!-- 多条记录条件查询 -->
+	<select id="selectList" resultMap="BaseResultMap" parameterType="cmcc.oa.entity.VehicleInfo">
+		select
+		<include refid="Base_Column_List" />
+		from vehicle_info
+		<where>
+			<if test="id != null and id!=''">
+				id=#{id,jdbcType=BIGINT}
+			</if>
+			<if test="carNumber != null and carNumber!=''">
+				and car_number=#{carNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="carModel != null and carModel !=''">
+				and car_model=#{carModel,jdbcType=INTEGER}
+			</if>
+			<if test="carMark != null and carMark !=''">
+				and car_mark=#{carMark,jdbcType=INTEGER}
+			</if>
+			<if test="createTime != null and createTime!=''">
+				and create_time=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime != null and updateTime!=''">
+				and update_time=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="flag != null and flag!=''">
+				and flag=#{flag,jdbcType=INTEGER}
+			</if>
+		</where>
+		order by create_time desc
+	</select>
+	
+	<!-- 单条记录条件查询 -->
+	<select id="SelectByCarNumber" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from vehicle_info
+		<where>
+			<if test="carNumber != null and carNumber!=''">
+			    car_number=#{carNumber}
+			</if>
+			    and flag=1 
+		</where>
+	</select>
+	
+	<!-- 根据用户的UserId查询所有的车辆信息 -->
+	<select id="SelectVehicinfoVoSingle" parameterType="cmcc.oa.vo.VehicinfoVo"
+		resultMap="ResultMapVo">
+		select
+		vehInfo.id,
+        vehInfo.flag,
+		carUser.mobile ,
+		carUser.user_name ,
+        carUser.company_id,
+		vehInfo.car_mark,
+		vehInfo.car_model,
+		vehInfo.create_time,
+		org.org_name,
+        org.org_fullname
+		FROM
+		per_vehicle perVhe
+		LEFT JOIN user carUser
+		on
+		carUser.id=perVhe.user_id
+		LEFT JOIN vehicle_info vehInfo
+		on
+		perVhe.car_number=vehInfo.car_number
+		LEFT JOIN organization org 
+		on
+		org.id=carUser.org_id
+		<where>
+			<if test="userId !=null and userId !=''">
+				perVhe.user_id=#{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="carNumber!=null and carNumber!=''">
+				perVhe.car_number=#{carNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="flag!=null and flag!=''">
+				and perVhe.flag=#{flag,jdbcType=INTEGER}
+			</if>
+			and vehInfo.flag=1
+		</where>
+	</select>
+	
+	<select id="SelectVehicinfoVoList" parameterType="cmcc.oa.vo.VehicinfoVo"
+		resultMap="ResultMapVo">
+		select
+		vehInfo.id,
+        vehInfo.flag,
+		perVhe.user_id ,
+		perVhe.car_number,
+		carUser.mobile ,
+		carUser.user_name ,
+        carUser.company_id,
+		vehInfo.car_mark,
+		vehInfo.car_model,
+		vehInfo.create_time,
+		org.org_name,
+        org.org_fullname
+		FROM
+		per_vehicle perVhe
+		LEFT JOIN user carUser
+		on
+		carUser.id=perVhe.user_id
+		LEFT JOIN vehicle_info vehInfo
+		on
+		perVhe.car_number=vehInfo.car_number
+		LEFT JOIN organization org 
+		on
+		org.id=carUser.org_id
+		<where>
+			<if test="userId !=null and userId !=''">
+				perVhe.user_id=#{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="carNumber!=null and carNumber!=''">
+				and vehInfo.car_number=#{carNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="carMark!=null and carMark!=''">
+				and vehInfo.car_mark=#{carMark,jdbcType=INTEGER}
+			</if>
+			and vehInfo.flag=1
+		</where>
+		ORDER BY create_time DESC
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		vehicle_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="cmcc.oa.entity.VehicleInfo">
+		insert into vehicle_info (id,
+		car_number, car_model,
+		car_mark, create_time, update_time,
+		flag)
+		values
+		(#{id,jdbcType=BIGINT}, #{carNumber,jdbcType=VARCHAR},
+		#{carModel,jdbcType=INTEGER},
+		#{carMark,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{flag,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="cmcc.oa.entity.VehicleInfo">
+		insert into vehicle_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="carNumber != null">
+				car_number,
+			</if>
+			<if test="carModel != null">
+				car_model,
+			</if>
+			<if test="carMark != null">
+				car_mark,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="flag != null">
+				flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="carNumber != null">
+				#{carNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="carModel != null">
+				#{carModel,jdbcType=INTEGER},
+			</if>
+			<if test="carMark != null">
+				#{carMark,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="flag != null">
+				#{flag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cmcc.oa.entity.VehicleInfo">
+		update vehicle_info
+		<set>
+			<if test="carNumber != null">
+				car_number = #{carNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="carModel != null">
+				car_model = #{carModel,jdbcType=INTEGER},
+			</if>
+			<if test="carMark != null">
+				car_mark = #{carMark,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="flag != null">
+				flag = #{flag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updateByCarNumber" parameterType="cmcc.oa.entity.VehicleInfo">
+		update vehicle_info
+		<set>
+			<if test="carModel != null ">
+				car_model = #{carModel,jdbcType=INTEGER},
+			</if>
+			<if test="carMark != null ">
+				car_mark = #{carMark,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null ">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="flag != null">
+				flag = #{flag,jdbcType=INTEGER}
+			</if>
+		</set>
+		where car_number = #{carNumber,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateByPrimaryKey" parameterType="cmcc.oa.entity.VehicleInfo">
+		update
+		vehicle_info
+		set car_number = #{carNumber,jdbcType=VARCHAR},
+		car_model =
+		#{carModel,jdbcType=INTEGER},
+		car_mark = #{carMark,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		flag = #{flag,jdbcType=INTEGER}
+		where
+		id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 查询一个用户名下的所有车辆 -->
+	<select id="findVehicleInfoByUserId" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from vehicle_info vi,per_vehicle pv where vi.id = pv.car_id and
+		pv.user_id=#{userId} and vi.flag=1
+	</select>
+	
+	<!-- 查询公家车和私家车合并的结果集信息 -->
+		<select id="queryVoOnParam" parameterType="cmcc.oa.vo.VehicinfoVo"
+			resultMap="ResultMapVo">
+		SELECT * from	(SELECT
+		vehInfo.id,
+		vehInfo.flag,
+		perVhe.user_id,
+		vehInfo.car_number,
+		carUser.mobile,
+		carUser.user_name,
+		carUser.company_id,
+		vehInfo.car_mark,
+		vehInfo.car_model,
+		vehInfo.create_time,
+		org.org_name,
+		org.org_fullname
+	    FROM
+		per_vehicle perVhe
+	    LEFT JOIN USER carUser ON carUser.id = perVhe.user_id
+	    LEFT JOIN vehicle_info vehInfo ON perVhe.car_number = vehInfo.car_number
+	    LEFT JOIN organization org ON org.id = carUser.org_id
+	    <where>
+	      <if test=" carNumber !=null and carNumber!=''">
+	      vehInfo.car_number=#{carNumber,jdbcType=VARCHAR}
+	      </if>
+	      <if test=" userName !=null and userName!='' ">
+	       and carUser.user_name like CONCAT("%",#{userName,jdbcType=VARCHAR},"%")
+	      </if>
+	       and vehInfo.flag=1
+	    </where>
+	    ORDER BY create_time DESC ) as t1
+	    
+	    <choose>
+	      <when test=" userName !=null and userName!='' ">
+	      </when>
+	      <otherwise>
+	    UNION all
+		SELECT
+			vehInfo.id,
+			vehInfo.flag,
+			NULL,
+			vehInfo.car_number,
+			'',
+			'',
+			'',
+			vehInfo.car_mark,
+			vehInfo.car_model,
+			vehInfo.create_time,
+			'',
+			''
+		    FROM
+			vehicle_info AS vehInfo
+            <where>
+              <if test=" carNumber !=null and carNumber!='' ">
+	           vehInfo.car_number=#{carNumber,jdbcType=VARCHAR}
+	          </if>
+               and  flag=1
+               and  vehInfo.car_mark=1
+            </where>
+	       ORDER BY create_time DESC 
+	      </otherwise>
+	    </choose>
+		</select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cmcc.oa.dao.AdminRoleMapper">
+	<resultMap id="BaseResultMap" type="cmcc.oa.entity.AdminRole">
+		<result column="admin_user_id" property="adminUserId" jdbcType="VARCHAR" />
+		<result column="company_id" property="companyId" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insert" parameterType="cmcc.oa.entity.AdminRole">
+		insert into admin_role (admin_user_id, company_id, role_id
+		)
+		values (#{adminUserId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR},
+		#{roleId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cmcc.oa.entity.AdminRole">
+		insert into admin_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="adminUserId != null">
+				admin_user_id,
+			</if>
+			<if test="companyId != null">
+				company_id,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="adminUserId != null">
+				#{adminUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	
+	<!-- 根据登录用户id修改角色 -->
+	<update id="updateByAdminUserId" parameterType="cmcc.oa.entity.AdminRole">
+		update admin_role
+		<set>
+			<if test="companyId != null">
+				company_id = #{companyId}
+			</if>
+			<if test="roleId != null">
+				role_id = #{roleId}
+			</if>
+		</set>
+		where admin_user_id=#{adminUserId}
+	</update>
+</mapper>

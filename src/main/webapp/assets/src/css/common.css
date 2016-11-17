@@ -1,0 +1,163 @@
+@charset "UTF-8";
+html {
+  height: 100%;
+}
+body {
+  background-color: #fff;
+  font-family: "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+  min-width: 1000px;
+  height: 100%;
+}
+.navbar {
+  background-color: #fff;
+  height: 60px;
+  min-height: 60px;
+  margin: 0;
+}
+.navbar .navbar-head {
+  color: #37a2ea;
+}
+.navbar .navbar-nav > li.nav-info {
+  height: 60px;
+  line-height: 60px;
+  text-align: right;
+  color: #999;
+  padding: 0 10px;
+}
+.navbar .navbar-nav > li.nav-button {
+  height: 60px;
+  line-height: 60px;
+  width: 60px;
+  font-size: 24px;
+  text-align: center;
+  color: #ccc;
+  border-left: 1px solid #ccc;
+  cursor: pointer;
+}
+.navbar .navbar-nav > li.nav-button:hover {
+  color: #b6b6b6;
+}
+.menu-panel {
+  background: #384e65;
+  width: 220px;
+  padding: 20px 0;
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  top: 60px;
+}
+.menu {
+  padding: 0;
+}
+.menu li {
+  list-style: none;
+  outline: none;
+}
+.menu a {
+  display: block;
+  color: #cfd9e6;
+  text-decoration: none;
+  padding: 10px 0 10px 40px;
+  cursor: pointer;
+}
+.menu a:hover {
+  background: #2d3c4d;
+}
+.menu a.current {
+  background: #2d3c4d;
+  border-left: 3px solid #37a2ea;
+  padding-left: 37px;
+}
+.menu .glyphicon {
+  font-size: 16px;
+  margin-right: 10px;
+}
+.footer {
+  background: #32465b;
+  color: #c9cdd0;
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.footer a {
+  color: #c9cdd0;
+}
+.footer a:hover {
+  color: #fff;
+}
+.footer .about {
+  left: 15px;
+  top: 14px;
+  position: absolute;
+}
+.footer .about span {
+  margin: 0 10px;
+}
+.footer .sns {
+  position: absolute;
+  right: 15px;
+  top: 9px;
+}
+.footer .sns a {
+  font-size: 18px;
+  margin-left: 12px;
+}
+.breadcrumbs {
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  background-color: #37a2ea;
+  color: #fff;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding: 0 0 0 15px;
+}
+.breadcrumbs .sep {
+  margin: 0 5px;
+}
+.breadcrumbs li {
+  float: left;
+  list-style: none;
+}
+#main {
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 60px;
+  bottom: 40px;
+  left: 220px;
+  right: 0;
+}
+#content {
+  padding: 15px;
+}
+.realtime-table {
+  table-layout: fixed;
+}
+.realtime-table caption {
+  font-size: 18px;
+  padding: 5px;
+  text-align: center;
+}
+.realtime-table th {
+  width: 8em;
+}
+.realtime-table td.msg {
+  text-align: center;
+  font-size: 20px;
+  padding: 5px;
+  color: #12b326;
+}
+.form label.error-valid {
+  float: right;
+  top: -60px;
+  position: relative;
+  color: #e23c0a;
+  font-weight: normal;
+}
+.form .required {
+  color: #e23c0a;
+}

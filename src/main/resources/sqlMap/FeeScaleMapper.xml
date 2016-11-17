@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cmcc.oa.dao.FeeScaleMapper">
+	<resultMap id="BaseResultMap" type="cmcc.oa.entity.FeeScale">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="free_time" property="freeTime" jdbcType="INTEGER" />
+		<result column="charge_period" property="chargePeriod"
+			jdbcType="INTEGER" />
+		<result column="fee_period" property="feePeriod" jdbcType="INTEGER" />
+		<result column="day_night" property="dayNight" jdbcType="INTEGER" />
+		<result column="car_type" property="carType" jdbcType="INTEGER" />
+		<result column="month_pay" property="monthPay" jdbcType="INTEGER" />
+		<result column="year_pay" property="yearPay" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, free_time, charge_period, fee_period, day_night,
+		car_type, month_pay, year_pay
+	</sql>
+	<!-- 根据条件查询出计费标准表 -->
+	<select id="findOneByCondition" parameterType="cmcc.oa.entity.FeeScale"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fee_scale
+		<where>
+			<if test="id != null and id != ''">
+				id = #{id ,jdbcType=INTEGER}
+			</if>
+			<if test="freeTime != null and freeTime != ''">
+				and free_time = #{freeTime ,jdbcType=INTEGER}
+			</if>
+			<if test="chargePeriod != null and chargePeriod != ''">
+				and charge_period = #{chargePeriod ,jdbcType=INTEGER}
+			</if>
+			<if test="feePeriod != null and feePeriod != ''">
+				and fee_period = #{feePeriod ,jdbcType=INTEGER}
+			</if>
+			<if test="dayNight != null">
+				and day_night = #{dayNight ,jdbcType=INTEGER}
+			</if>
+			<if test="carType != null and carType != ''">
+				and car_type = #{carType ,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateScale" parameterType="cmcc.oa.entity.FeeScale">
+		update fee_scale
+		<set>
+			<if test="id != null">
+				id = #{id ,jdbcType=INTEGER},
+			</if>
+			<if test="freeTime != null">
+				free_time = #{freeTime ,jdbcType=INTEGER},
+			</if>
+			<if test="chargePeriod != null">
+				charge_period = #{chargePeriod ,jdbcType=INTEGER},
+			</if>
+			<if test="feePeriod != null">
+				 fee_period = #{feePeriod ,jdbcType=INTEGER},
+			</if>
+			<if test="dayNight != null">
+				 day_night = #{dayNight ,jdbcType=INTEGER},
+			</if>
+			<if test="carType != null">
+				 car_type = #{carType ,jdbcType=INTEGER},
+			</if>
+		</set>
+		<where>
+			<if test="dayNight != null">
+				day_night = #{dayNight ,jdbcType=INTEGER}
+			</if>
+			<if test="carType != null">
+				and car_type = #{carType ,jdbcType=INTEGER}
+			</if>
+		</where>
+	</update>
+	
+	<update id="updateBenefit" parameterType="java.lang.Integer">
+		update fee_scale
+		<set>
+			<if test="monthPay != null">
+				 month_pay = #{monthPay ,jdbcType=INTEGER},
+			</if>
+			<if test="yearPay != null">
+				 year_pay = #{yearPay ,jdbcType=INTEGER},
+			</if>
+		</set>
+		<where>
+			<if test="carType != null">
+				car_type = #{carType ,jdbcType=INTEGER}
+			</if>
+		</where>
+	</update>
+
+	<select id="findAllByCondition" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from fee_scale
+	</select>
+	
+	
+</mapper>
